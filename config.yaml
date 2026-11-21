@@ -1,0 +1,72 @@
+workspace: C:\Youtube
+
+clip:
+  min_seconds: 15
+  max_seconds: 45          # Shorts hard limit is 60s (3 min in some regions); keep a margin
+
+detect:
+  window_seconds: 30       # clip length for auto-detected highlights
+  peak_position: 0.7       # peak sits 70% into the clip so the build-up is visible
+
+transcribe:
+  engine: none             # none | faster-whisper  (context for the LLM only)
+  model: small
+
+llm:
+  provider: anthropic
+  model: claude-haiku-5-5
+  vision: true             # send sampled frames so the script writer can SEE the clip
+  frames: 6
+
+voice:
+  engine: edge-tts        # test_tone | edge-tts | elevenlabs
+  voice: en-US-GuyNeural   # edge-tts voice, or ElevenLabs voice_id
+  lead_in_seconds: 0.4
+
+edit:
+  width: 1080
+  height: 1920
+  game_volume: 1.0
+  duck_threshold: 0.03
+  duck_ratio: 8
+  # Visual tuning parameters for enhanced effects
+  base_zoom: 1.15           # Default zoom level
+  max_zoom: 1.5             # Max zoom on peaks
+  freeze_frame_count: 3     # Max freeze-frame analysis beats
+  tactical_count: 6         # Max tactical overlays
+  facecam_height_ratio: 0.30
+  facecam_margin_bottom: 50
+  facecam_corner_radius: 12
+  blur_background: true
+  punch_duration_peak: 0.4
+  punch_duration_reaction: 0.6
+  punch_duration_sustained: 0.8
+
+approvals:
+  clip: true               # human gate #1: review the raw clip
+  final: true              # human gate #2: review the finished render
+
+upload:
+  enabled: true           # turn on after `python cli.py auth` works
+  slots_ist: ["19:45", "21:15"]   # daily publish times, India time
+  min_lead_minutes: 30     # YouTube needs scheduled times in the future
+  category_id: "20"        # Gaming
+  client_secret: creds/client_secret.json
+  token: creds/token.json
+  description_footer: ""   # e.g. affiliate links or hashtags added to every description
+  # synthetic_media: false # uncomment and set true/false to send YouTube's AI-content disclosure flag
+
+cta:
+  enabled: true
+  text: "Like, share and subscribe for more!"
+  text_series: "Like, share and subscribe, and watch part {next} next!"
+  min_seconds: 2.5
+
+live:
+  channels:
+    - name: first_test
+      url: https://www.youtube.com/watch?v=lF_QYSm2T-Q
+      streamer: "Windah Basudara"
+      game: "GTA VI"
+      credit: https://www.youtube.com/watch?v=lF_QYSm2T-Q
+      facecam: [0.828, 0.521, 0.172, 0.277]

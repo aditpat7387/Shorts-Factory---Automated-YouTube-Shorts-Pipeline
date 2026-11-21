@@ -1,0 +1,10 @@
+creds/
+workspace/
+raw_clips/
+*.db
+__pycache__/
+*.pyc
+*.mp4
+*.mov
+*.mkv
+.claude/

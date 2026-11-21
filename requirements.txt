@@ -1,0 +1,11 @@
+pyyaml
+numpy
+anthropic            # script writer (optional; template fallback exists)
+edge-tts             # free AI voice (optional)
+faster-whisper       # transcript context for the script writer (optional)
+yt-dlp               # URL/VOD download (optional if you only use local files)
+google-api-python-client
+google-auth-oauthlib
+requests
+tzdata
+streamlink
